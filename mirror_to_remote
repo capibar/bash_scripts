@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#This script helps to upload git projects to the remote repository
+
+#group describes which group's projects to upload to the remote repo
+group=$1
+#remote repository connection settings
+user=''
+password=''
+url='gitlab:81'
+#path to the projects to upload
+list=/home/osboxes/gitlab.projects/$group/*
+for project in $list
+do
+ cd $project
+ git fetch --tags; git remote set-url origin https://'$user:$password'@$url/$group/${PWD##*/}.git ; git push origin --all ; git push --tags
+done
