@@ -1,0 +1,2 @@
+#This is a command to clone multiple project via api interface from gitlab
+>for repo in $(curl "https://gitlab.some.where/api/v4/projects?private_token=dhNBUf6spMSKs2jUGQmp" | jq .[].web_url | tr -d '"'); do repo=${repo:0:8}'USER:PASSWORD'@${repo:8}.git; git clone $repo; done;
